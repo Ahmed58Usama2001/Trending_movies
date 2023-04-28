@@ -1,0 +1,55 @@
+<div *ngIf="loading ;else x" class="d-flex justify-content-center vh-100 align-items-center ">
+    <i class="fas fa-spin fa-spinner fa-5x text-info"></i>
+</div>
+
+<ng-template #x>
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img *ngIf="item?.poster_path" [src]="'https://image.tmdb.org/t/p/w500'+item?.poster_path" class="w-100"
+                    [alt]="item?.title">
+                <img *ngIf="item?.profile_path" [src]="'https://image.tmdb.org/t/p/w500'+item?.profile_path"
+                    class="w-100" [alt]="item?.title">
+            </div>
+            <div class="col-md-8 d-flex align-items-center ">
+                <div>
+                    <h2 class="my-2 text-info fw-bold">{{item?.name}}{{item?.title}}</h2>
+                    <h2 class="my-2 text-muted">{{item?.known_for_department}}</h2>
+                    <p class="text-muted my-2">{{item?.overview}}{{item?.biography}}</p>
+                    <div class="my-2" *ngIf="item?.vote_average">Vote Average : <span
+                            class="text-muted">{{item?.vote_average}}</span><i
+                            class="mx-1 fa-solid fa-star text-warning"></i></div>
+                    <div class="my-2" *ngIf="item?.budget">Budget : <span class="text-muted">{{item.budget}} $</span><i
+                            class=" mx-1 fa-solid fa-sack-dollar text-success"></i></div>
+                    <div class="my-2" *ngIf="item?.revenue">Revenue : <span class="text-muted">{{item.revenue}}
+                            viewers</span>
+                        <i class="mx-1 fa-solid fa-eye text-primary"></i>
+                    </div>
+                    <div class="my-2" *ngIf="item?.vote_count">Vote Count : <span class="text-muted">{{item.vote_count}}
+                            voters</span> <i class="mx-1 fa-solid fa-magnifying-glass text-primary"></i></div>
+
+
+
+                    <div class="my-2" *ngIf="item?.birthday">Birthday : <span class="text-muted">{{item?.birthday}}
+                        </span> <i class="mx-1 fa-solid fa-cake-candles text-primary"></i></div>
+                    <div class="my-2" *ngIf="item?.place_of_birth">Place Of Birth : <span
+                            class="text-muted">{{item?.place_of_birth}}
+                        </span> <i class="mx-1 fa-solid fa-house text-primary"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="row py-4" *ngIf="similar.length">
+            <h3 *ngIf="media_type=='tv'">Similar TV Shows</h3>
+            <h3 *ngIf="media_type=='movie'">Similar Movies</h3>
+            <div *ngFor="let item of similar" class="col-md-2">
+                <div class="my-2 position-relative" (click)="anotherDetails(item.id,media_type)">
+                    <img [src]="'https://image.tmdb.org/t/p/w500'+item?.poster_path" class="w-100" [alt]="item?.title">
+                    <h3 class="h5 py-2">{{item?.title}}{{item?.name}}</h3>
+                    <span
+                        class="position-absolute rounded bg-warning text-black fw-bolder top-0 start-0 p-1 m-1">{{item?.vote_average?.toFixed(1)}}
+                        <i class="fa-solid fa-star "></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

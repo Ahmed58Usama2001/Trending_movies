@@ -1,0 +1,13 @@
+.fa-spin {
+    color: #4799EB;
+}
+
+.col-md-2 {
+    cursor: pointer;
+    transition: transform 0.3s;
+
+}
+
+.col-md-2:hover {
+    transform: scale(1.05, 1.05);
+}

@@ -1,0 +1,25 @@
+<div *ngIf="loading ;else x" class="d-flex justify-content-center vh-100 align-items-center ">
+    <i class="fas fa-spin fa-spinner fa-5x text-info"></i>
+</div>
+
+<ng-template #x>
+    <div class="container">
+        <div class="row py-5">
+
+
+            <div *ngFor="let tv of TV" class="col-md-2" [routerLink]="['/details',tv.id,'tv']">
+                <div class="my-2 position-relative">
+                    <img [src]="'https://image.tmdb.org/t/p/w500'+tv?.poster_path" class="w-100" [alt]="tv?.name">
+                    <h3 class="h5 py-2">{{tv?.name}}</h3>
+                    <span
+                        class="position-absolute rounded bg-warning text-black fw-bolder top-0 start-0 p-1 m-1">{{tv?.vote_average?.toFixed(1)}}
+                        <i class="fa-solid fa-star "></i></span>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</ng-template>
